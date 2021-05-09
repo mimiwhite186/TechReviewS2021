@@ -28,15 +28,17 @@ Including another URLconf
 """
 
 from django.contrib import admin
-def jls_extract_def(django, urls):
-    from django.urls import path, include
+
+from django.urls import path, include
     
-    urlpatterns = [
-        path('admin/', admin.site.urls),
-        path('tech/', include('tech.urls')),
-    ]
-    return urlpatterns
+urlpatterns = [
+
+path('admin/', admin.site.urls),
+
+path('tech/', include('tech.urls')),
+
+]
 
 
-urlpatterns = jls_extract_def(django, urls)
+
 
