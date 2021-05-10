@@ -2,41 +2,56 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
-class TechType(models.Model):
-    typename=models.CharField(max_length=255)
-    typedescription=models.TextField(null=True, blank=True)
+class Meeting(models.Model):
+    meetingtitle=models.CharField(max_length=255)
+    meetingdate=models.DateField()
+    meetingtime=models.TimeField()
+    location=models.CharField(max_length=255)
+    Agenda=models.TextField()
 
     def __str__(self):
-        return self.typename
+        return self.meetingtitle
 
     class Meta:
-        db_table='techtype'
+        db_table='Meeting'
 
-class Product(models.Model):
-    productname=models.CharField(max_length=255)
-    producttype=models.ForeignKey(TechType, on_delete=models.DO_NOTHING)
-    user=models.ForeignKey(User, on_delete=models.DO_NOTHING)
+class MeetingMinutes(models.Model):
+    meetingid=models.ForeignKey(Meeting, on_delete=models.DO_NOTHING)
+    attendance=models.ForeignKey(User, on_delete=models.CASCADE)
+    minutestext=models.TextField()
+
+
+    def __str__(self):
+        return self.meetingid
+
+    class Meta:
+        db_table='MeetingMinutes'
+
+class Resource(models.Model):
+    resourcename=models.CharField(max_length=255)
+    resourcetype=models.CharField(max_length=255)
+    resourceurl=models.URLField()
     dateentered=models.DateField()
-    price=models.DecimalField(max_digits=6, decimal_places=2)
-    producturl=models.URLField()
+    user=models.ForeignKey(User, on_delete=models.DO_NOTHING)
     description=models.TextField()
 
 
     def __str__(self):
-        return self.productname
-
-    class Meta:
-        db_table='product'
-
-class Review(models.Model):
-    title=models.CharField(max_length=255)
-    user=models.ForeignKey(User, on_delete=models.CASCADE)
-    product=models.ForeignKey(Product, on_delete=models.CASCADE)
-    reviewdate=models.DateField()
-    reviewtext=models.TextField()
-
-    def __str__(self):
-        return self.title
+        return self.resourcename
     
     class Meta:
-        db_table='review'
+        db_table='Resource'
+
+class Event(models.Model):
+    eventtitle=models.CharField(max_length=255)
+    location=models.CharField(max_length=255)
+    eventdate=models.DateField()
+    eventtime=models.TimeField()
+    description=models.TextField()
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.eventtitle
+    
+    class Meta:
+        db_table='Event'
