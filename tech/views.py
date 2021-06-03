@@ -14,5 +14,5 @@ def meeting(request):
     return render(request, 'tech/meeting.html', {'meeting_list' : meeting_list})
 
 def meetingdetail(request, id):
-    meeting=get_object_or_404(meetingdetail, pk=id)
+    meeting=get_object_or_404(Meeting, pk=id)
     return render(request, 'tech/meetingdetail.html', {'meeting' : meeting})
