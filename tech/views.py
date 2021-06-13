@@ -1,6 +1,4 @@
 from django.contrib.auth import login
-from TechReviewS2021.tech.forms import MeetingForm
-from TechReviewS2021.tech.forms import ResourceForm
 from django.shortcuts import render, get_object_or_404
 from .models import Meeting, MeetingMinutes, Resource, Event
 from django.urls import reverse_lazy

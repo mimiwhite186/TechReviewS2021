@@ -1,11 +1,12 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% block content %}
+
 <h2>Add Meeting</h2>
 <table class='table'>
     <form method="POST", class="post-form">{% csrf_token %}
         {{form.as_table}}
-        <botton type="submit" clss="save btn btn_default">Save</botton>
-    </form>
-</table>
+    </table>
+    <botton type="submit" clss="save btn btn_default">Save</botton>
+</form>
 
-{ % endblock %}
+{% endblock %}
